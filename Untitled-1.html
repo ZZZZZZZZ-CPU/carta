@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffe6e6,#ffb3ba);
+    font-family:Arial, sans-serif;
+    overflow:hidden;
+}
+
+/* SOBRE */
+.envelope-container{
+    position:relative;
+    width:90%;
+    max-width:350px;
+    perspective:1000px;
+    cursor:pointer;
+    transition:transform 0.6s ease;
+}
+
+.envelope-container:hover{
+    transform:scale(1.05);
+}
+
+.envelope{
+    width:100%;
+    display:block;
+}
+
+/* CARTA */
+.letter{
+    position:absolute;
+    top:20px;
+    left:10%;
+    width:80%;
+    height:70%;
+    background:#ffd6e7;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.3);
+    transform:translateY(100%);
+    transition:transform 1s ease;
+    text-align:center;
+    overflow:auto;
+}
+
+.open .letter{
+    transform:translateY(-10%);
+}
+
+.letter p{
+    color:#5a2a3b;
+    font-size:15px;
+    line-height:1.8;
+    white-space:pre-line;
+}
+
+/* CORAZONES */
+.heart{
+    position:fixed;
+    top:-30px;
+    pointer-events:none;
+    animation:fall linear forwards;
+    filter:drop-shadow(0 0 6px rgba(255,105,180,0.8));
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* GLITTER */
+.sparkle{
+    position:fixed;
+    width:6px;
+    height:6px;
+    background:white;
+    border-radius:50%;
+    pointer-events:none;
+    box-shadow:0 0 10px white, 0 0 20px pink;
+    animation:sparkleFall linear forwards;
+}
+
+@keyframes sparkleFall{
+    to{
+        transform:translateY(110vh);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope-container" id="envelope" onclick="openLetter()">
+    <img src="sobre.webp" class="envelope">
+    <div class="letter">
+        <p>
+Olaaaa,
+
+perdón por no haberlo mandado a las 12, me fui en la senda vola, pero gracias por ser mi 14 de febrero, espero que lo de nosotros nunca termine y espero que sea eterno.
+
+Entiendo que puede que a esta edad las cosas no duren tanto, pero yo si quiero durar toda una eternidad contigo.
+
+Una de mis metas contigo es formar una familia.
+
+Gracias por todo, por ayudarme, amarme, aguantarme y todo, para mi no hay niña mas hermosa que usted, si usted supiera como la veo yo no dudaría del amor que le tengo.
+
+Amo todo de usted, sus ojos, su cara, su cuerpo, y todo.
+
+Espero que nunca te vayas de mi lado, yo te amo demasiado, pase lo que pase yo siempre te seguire amando.
+
+Gracias por todo, gracias por hacerme sentir amado de verdad.
+
+Yo te amo mucho.
+
+Perdón si es muy corta, es que no se que seguir poniendo, perdón.
+
+t amo muuchooo 💕
+        </p>
+    </div>
+</div>
+
+<script>
+let opened = false;
+let heartInterval;
+let sparkleInterval;
+
+function openLetter(){
+    if(opened) return;
+    opened = true;
+
+    document.getElementById("envelope").classList.add("open");
+
+    heartInterval = setInterval(createHeart, 250);
+    sparkleInterval = setInterval(createSparkle, 120);
+}
+
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+
+    const hearts = ["❤️","💖","💘","💝"];
+    heart.innerHTML = hearts[Math.floor(Math.random()*hearts.length)];
+
+    const size = 15 + Math.random()*30;
+    heart.style.fontSize = size + "px";
+
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (4 + Math.random()*4) + "s";
+
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),8000);
+}
+
+function createSparkle(){
+    const sparkle = document.createElement("div");
+    sparkle.classList.add("sparkle");
+
+    sparkle.style.left = Math.random()*100 + "vw";
+    sparkle.style.top = "-10px";
+    sparkle.style.animationDuration = (3 + Math.random()*3) + "s";
+
+    document.body.appendChild(sparkle);
+    setTimeout(()=>sparkle.remove(),6000);
+}
+</script>
+
+</body>
+</html>

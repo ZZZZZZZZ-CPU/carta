@@ -6,194 +6,159 @@
 <title>Para Ti 💕</title>
 
 <style>
-body{
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
     height:100vh;
+    background: linear-gradient(135deg,#ff4e8d,#ff9ecf);
+    overflow:hidden;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(135deg,#ffdde1,#ee9ca7);
-    overflow:hidden;
-    font-family:'Segoe UI', sans-serif;
 }
 
-/* OSCURECER FONDO */
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0);
-    transition:background 1s ease;
-    pointer-events:none;
-}
-
-.overlay.active{
-    background:rgba(0,0,0,0.4);
-}
-
-/* SOBRE */
-.envelope{
-    width:300px;
-    cursor:pointer;
-    transition:transform 0.8s ease;
-    z-index:5;
-}
-
-.envelope img{
-    width:100%;
-    display:block;
-}
-
-/* CARTA */
-.card{
-    position:fixed;
-    bottom:-100%;
-    width:90%;
-    max-width:420px;
-    height:75%;
-    background:linear-gradient(180deg,#ffd6e7,#f8c8dc);
-    border-radius:25px 25px 0 0;
-    padding:30px;
-    box-shadow:0 -10px 40px rgba(0,0,0,0.4);
-    overflow-y:auto;
-    transition:bottom 1.2s cubic-bezier(.68,-0.55,.27,1.55);
-    text-align:center;
-    opacity:0;
-}
-
-.card.show{
-    bottom:0;
-    opacity:1;
-}
-
-/* TEXTO */
-.card p{
-    font-size:17px;
-    line-height:1.8;
-    color:#5a2a3b;
-    animation:fadeIn 2s ease forwards;
-    opacity:0;
-}
-
-@keyframes fadeIn{
-    to{opacity:1;}
-}
-
-/* CORAZONES */
+/* Corazones animados */
 .heart{
-    position:fixed;
-    top:-20px;
-    pointer-events:none;
-    animation:fall linear forwards;
-    filter:drop-shadow(0 0 8px rgba(255,105,180,0.9));
+    position:absolute;
+    color:white;
+    animation: fall linear infinite;
+    opacity:0.8;
 }
 
 @keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(360deg);
-        opacity:0;
-    }
+    0%{ transform: translateY(-10vh) rotate(0deg); opacity:1;}
+    100%{ transform: translateY(110vh) rotate(360deg); opacity:0;}
 }
 
-/* PARTÍCULAS */
-.sparkle{
-    position:fixed;
-    width:6px;
-    height:6px;
+/* Carta */
+.carta-container{
+    perspective:1000px;
+}
+
+.carta{
+    width:320px;
+    height:220px;
+    background:#fff;
+    border-radius:15px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.3);
+    position:relative;
+    cursor:pointer;
+    transition:transform 0.8s;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+    color:#ff4e8d;
+    font-size:20px;
+}
+
+.carta:hover{
+    transform:scale(1.05);
+}
+
+/* Interior */
+.mensaje{
+    position:absolute;
+    width:90%;
+    max-width:500px;
+    max-height:70vh;
+    overflow:auto;
     background:white;
-    border-radius:50%;
-    pointer-events:none;
-    box-shadow:0 0 15px white, 0 0 25px pink;
-    animation:sparkleFall linear forwards;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.4);
+    display:none;
+    animation: aparecer 1s ease forwards;
 }
 
-@keyframes sparkleFall{
-    to{
-        transform:translateY(110vh);
-        opacity:0;
-    }
+@keyframes aparecer{
+    from{ opacity:0; transform:scale(0.7);}
+    to{ opacity:1; transform:scale(1);}
+}
+
+.mensaje h2{
+    text-align:center;
+    margin-bottom:15px;
+    color:#ff4e8d;
+}
+
+.mensaje p{
+    line-height:1.6;
+    margin-bottom:10px;
+    color:#333;
+}
+
+.btn-cerrar{
+    margin-top:15px;
+    padding:8px 15px;
+    background:#ff4e8d;
+    border:none;
+    color:white;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.btn-cerrar:hover{
+    background:#ff2e76;
 }
 </style>
 </head>
 
 <body>
 
-<div class="overlay" id="overlay"></div>
-
-<div class="envelope" onclick="openCard()" id="envelope">
-    <img src="sobre.webp" alt="Carta">
+<div class="carta-container">
+    <div class="carta" onclick="abrirCarta()">
+        💌 Ábreme 💌
+    </div>
 </div>
 
-<div class="card" id="card">
-<p>
-Olaaaa,<br><br>
+<div class="mensaje" id="mensaje">
+    <h2>Para Ti 💕</h2>
 
-perdón por no haberlo mandado a las 12, me fui en la senda vola, pero gracias por ser mi 14 de febrero, espero que lo de nosotros nunca termine y espero que sea eterno,<br><br>
+    <p>Olaaaa, perdón por no haberlo mandado a las 12, me fui en la senda vola, pero gracias por ser mi 14 de febrero, espero que lo de nosotros nunca termine y espero que sea eterno.</p>
 
-entiendo que puede que a esta edad las cosas no duren tanto, pero yo si quiero durar toda una eternidad contigo,<br><br>
+    <p>Entiendo que puede que a esta edad las cosas no duren tanto, pero yo si quiero durar toda una eternidad contigo.</p>
 
-una de mis metas contigo es formar una familia,<br><br>
+    <p>Una de mis metas contigo es formar una familia, gracias por todo, por ayudarme, amarme, aguantarme y todo.</p>
 
-gracias por todo, por ayudarme, amarme, aguantarme y todo,<br><br>
+    <p>Para mi no hay niña mas hermosa que usted, si usted supiera como la veo yo no dudaría del amor que le tengo.</p>
 
-para mi no hay niña mas hermosa que usted, si usted supiera como la veo yo no dudaría del amor que le tengo,<br><br>
+    <p>Amo todo de usted, sus ojos, su cara, su cuerpo, y todo.</p>
 
-amo todo de usted, sus ojos, su cara, su cuerpo, y todo,<br><br>
+    <p>Espero que nunca te vayas de mi lado, yo te amo demasiado, pase lo que pase yo siempre te seguire amando.</p>
 
-espero que nunca te vayas de mi lado,<br><br>
+    <p>Gracias por todo, gracias por hacerme sentir amado de verdad.</p>
 
-yo te amo demasiado, pase lo que pase yo siempre te seguire amando,<br><br>
+    <p>Yo te amo mucho, perdón si es muy corta, es que no se que seguir poniendo, perdón, t amo muuchooo 💕</p>
 
-gracias por todo, gracias por hacerme sentir amado de verdad,<br><br>
-
-yo te amo mucho,<br><br>
-
-perdón si es muy corta, es que no se que seguir poniendo, perdón,<br><br>
-
-t amo muuchooo 💕
-</p>
+    <div style="text-align:center;">
+        <button class="btn-cerrar" onclick="cerrarCarta()">Cerrar 💗</button>
+    </div>
 </div>
-
-<!-- Música romántica suave -->
-<audio id="music" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8d4e5c6f4.mp3?filename=romantic-love-11754.mp3" type="audio/mpeg">
-</audio>
 
 <script>
-let opened=false;
-
-function openCard(){
-    if(opened) return;
-    opened=true;
-
-    document.getElementById("card").classList.add("show");
-    document.getElementById("overlay").classList.add("active");
-    document.getElementById("envelope").style.transform="scale(0)";
-    document.getElementById("music").play();
-
-    setInterval(createHeart,200);
-    setInterval(createSparkle,120);
+function abrirCarta(){
+    document.querySelector(".mensaje").style.display="block";
 }
 
-function createHeart(){
-    const heart=document.createElement("div");
+function cerrarCarta(){
+    document.querySelector(".mensaje").style.display="none";
+}
+
+/* Crear corazones */
+for(let i=0;i<40;i++){
+    let heart=document.createElement("div");
     heart.classList.add("heart");
-    const hearts=["❤️","💖","💘","💝"];
-    heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];
+    heart.innerHTML="❤";
     heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(15+Math.random()*35)+"px";
-    heart.style.animationDuration=(4+Math.random()*4)+"s";
+    heart.style.fontSize=(Math.random()*20+10)+"px";
+    heart.style.animationDuration=(Math.random()*5+5)+"s";
     document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),8000);
-}
-
-function createSparkle(){
-    const sparkle=document.createElement("div");
-    sparkle.classList.add("sparkle");
-    sparkle.style.left=Math.random()*100+"vw";
-    sparkle.style.top="-10px";
-    sparkle.style.animationDuration=(3+Math.random()*3)+"s";
-    document.body.appendChild(sparkle);
-    setTimeout(()=>sparkle.remove(),6000);
 }
 </script>
 
